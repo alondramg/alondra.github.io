@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Animado</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: 
+                linear-gradient(rgba(102, 51, 153, 0.85), rgba(102, 51, 153, 0.85)),
+                url('https://placekitten.com/1920/1080') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: backgroundAnimation 20s infinite alternate;
+            overflow: hidden;
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .form-container {
+            background-color: rgba(75, 0, 130, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 500px;
+            transform: perspective(1000px) rotateY(0deg);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            animation: formEntrance 1s ease-out forwards;
+        }
+
+        @keyframes formEntrance {
+            0% {
+                opacity: 0;
+                transform: perspective(1000px) rotateY(90deg) scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: perspective(1000px) rotateY(0deg) scale(1);
+            }
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent 45%,
+                rgba(186, 85, 211, 0.3) 50%,
+                transparent 55%
+            );
+            animation: shine 3s infinite;
+            z-index: 0;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: rotate(0deg) translate(-30%, -30%);
+            }
+            100% {
+                transform: rotate(360deg) translate(-30%, -30%);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #E0B0FF;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: titleFloat 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleFloat {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            animation: fieldEntrance 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fieldEntrance {
+            0% {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #D8BFD8;
+            transition: all 0.3s ease;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #9370DB;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.95);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #BA55D3;
+            box-shadow: 0 0 0 3px rgba(186, 85, 211, 0.5);
+            background-color: white;
+            transform: scale(1.02);
+        }
+
+        .btn-submit {
+            background: linear-gradient(45deg, #9B30FF, #BA55D3);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 500;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(155, 48, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #BA55D3, #9B30FF);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(155, 48, 255, 0.6);
+        }
+
+        .btn-submit:hover::before {
+            left: 0;
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        /* Animaciones escalonadas para los campos */
+        .form-group:nth-child(1) { animation-delay: 0.3s; }
+        .form-group:nth-child(2) { animation-delay: 0.4s; }
+        .form-group:nth-child(3) { animation-delay: 0.5s; }
+        .form-group:nth-child(4) { animation-delay: 0.6s; }
+        .form-group:nth-child(5) { animation-delay: 0.7s; }
+        .form-group:nth-child(6) { animation-delay: 0.8s; }
+        .form-group:nth-child(7) { animation-delay: 0.9s; }
+        .btn-container { animation: fieldEntrance 0.6s ease-out 1s forwards; opacity: 0; }
+
+        /* Efecto de partículas */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(216, 191, 216, 0.6);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="form-container">
+        <h1>Formulario de Registro</h1>
+        
+        <form action="procesar.php" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="Alondra" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" value="Moncada Granados" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="domicilio">Domicilio:</label>
+                <input type="text" id="domicilio" name="domicilio" value="San Bartolo" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="calle">Calle:</label>
+                <input type="text" id="calle" name="calle" value="Baja California" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="numero">No. Exterior:</label>
+                <input type="text" id="numero" name="18" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="colonia">Colonia:</label>
+                <input type="text" id="colonia" name="colonia" value="Venustiano Carranza" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cp">Código Postal:</label>
+                <input type="text" id="cp" name="cp" value="42030" required>
+            </div>
+            
+            <div class="btn-container">
+                <button type="submit" class="btn-submit">Enviar Datos</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Crear partículas animadas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Tamaño aleatorio entre 2px y 6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posición aleatoria
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Duración de animación aleatoria
+                const duration = Math.random() * 10 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Retraso aleatorio
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Llamar a la función cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', createParticles);
+        
+        // Efecto de hover 3D en el formulario
+        const formContainer = document.querySelector('.form-container');
+        
+        formContainer.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            formContainer.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+        
+        formContainer.addEventListener('mouseleave', () => {
+            formContainer.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+        });
+    </script>
+</body>
+</html>
